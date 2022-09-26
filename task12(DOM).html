@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>DOM Task 10</title>
+</head>
+<body>
+	<form onsubmit="saveToLocalStorage(event)">
+		<label> Name </label>
+		<input type="text" name="username" required/><br><br>
+		<label> Email </label>
+		<input type="email" name="emailId" required/><br><br>
+		<label> Phone Number </label>
+		<input type="tel" name="phonenumber" required/><br><br>
+		<button> Submit </button>
+	</form>
+	<ul id='listOfUsers'></ul>
+<script>
+	function saveToLocalStorage(e){      // e=event
+		e.preventDefault();
+		const name = e.target.username.value;
+		const email = e.target.emailId.value;
+		const phonenumber = e.target.phonenumber.value;
+		// localStorage.setItem('name', name);
+		// localStorage.setItem('email', email);
+		// localStorage.setItem('phonenumber', phonenumber);
+
+		const object={   // created an object 
+			name: name,
+			email: email,
+			phonenumber: phonenumber
+		}
+		//making unique key(object.name) by removing common key(userDetails) to save all users
+        localStorage.setItem(object.name, JSON.stringify(object));  //JSON converts object to string
+
+        showAllUsersOnScreen(object); 
+	}
+
+	function showAllUsersOnScreen(user){
+	const parentNode = document.getElementById('listOfUsers');
+	const childHTML = `<li> ${user.name} - ${user.email} </li>`; //here `` and ${} inside these are used variables not the strings 
+
+		parentNode.innerHTML += childHTML; // this will show all user details on the screen 
+	}
+
+</script>
+</body>
+</html>
