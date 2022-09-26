@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>DOM Task 10</title>
+</head>
+<body>
+	<form onsubmit="saveToLocalStorage(event)">
+		<label> Name </label>
+		<input type="text" name="username" required/><br><br>
+		<label> Email </label>
+		<input type="email" name="emailId" required/><br><br>
+		<label> Phone Number </label>
+		<input type="tel" name="phonenumber" required/><br><br>
+		<button> Submit </button>
+	</form>
+<script>
+	function saveToLocalStorage(e){      // e=event
+		event.preventDefault();
+		const name = e.target.username.value;
+		const email = e.target.emailId.value;
+		const phonenumber = e.target.phonenumber.value;
+		localStorage.setItem('name', name);
+		localStorage.setItem('email', email);
+		localStorage.setItem('phonenumber', phonenumber);
+
+		const object={   // created an object 
+			name: name,
+			email: email,
+			phonenumber: phonenumber
+		}
+        localStorage.setItem('userDetails', JSON.stringify(object));  //converts object to string 
+	}
+</script>
+</body>
+</html>
